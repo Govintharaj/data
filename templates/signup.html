@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<h1><center>SignUp</center></h1>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+</head>
+
+        <meta name="description" content="User login page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+        <!-- bootstrap & fontawesome -->
+        <link rel="stylesheet" href="static/assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="static/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+        <!-- text fonts -->
+        <link rel="stylesheet" href="static/assets/css/fonts.googleapis.com.css" />
+
+        <!-- ace styles -->
+        <link rel="stylesheet" href="static/assets/css/ace.min.css" />
+        <link rel="stylesheet" href="static/assets/css/custom.css" />
+
+        <!--[if lte IE 9]>
+            <link rel="stylesheet" href="assets/css/ace-part2.min.css" />
+        <![endif]-->
+        <link rel="stylesheet" href="static/assets/css/ace-rtl.min.css" />
+        <script src="static/assets/js/jquery-2.1.4.min.js"></script>
+<script src="static/js/jquery-2.1.4.min.js"></script>
+        <script>
+  $(document).ready(function() 
+  {
+    $('#subm_btn').click(function() 
+      {
+      var c=0;
+      var name=$("#first").val();
+      var lastname=$("#last").val();
+      var username=$("#email").val();
+      var passwords=$("#pwd").val();
+      var cpasswords=$("#cpwd").val();
+      if (name.length===0){
+      $('#n1').show().text('Please enter the firstname');
+        }
+      else if(!name.match(/^[a-zA-Z. ]+$/)){
+      $('#n1').show().text('FirstName is should be contains only characters');
+      $('#first').val('');
+      }
+      else if(name.length<5)
+      {
+        $('#n1').show().text("firstname minimum length 5 letters and maximum length12latters")
+        $('#first').val('');
+      }
+      else{
+          $('#n1').hide();
+          c++;
+        }
+      if (lastname.length===0){
+      $('#n2').show().text('Please enter the lastname');
+        }
+      else if(!lastname.match(/^[a-zA-Z. ]+$/)){
+      $('#n2').show().text('LastName is should be contains only characters');
+      $('#last').val('');
+      }
+        else if(lastname.length<5)
+      {
+        $('#n2').show().text("lastname minimum length 5 letters and maximum length12 letters")
+        $('#last').val();
+      }
+      else{
+          $('#n2').hide();
+          c++;
+        }
+          if(username.length===0){
+        $('#n3').show().text("Please enter the username");
+      }
+      else if(!username.match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/))
+      {
+        $('#n3').show().text("Username Field is Invalid")
+        $('#email').val('');
+
+      }
+      else{
+        $('#n3').hide();
+        c++;
+      }
+
+
+      if (passwords.length===0){
+        $('#n5').show().text("Please enter the password");
+      }
+      else if(!passwords.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!^&*()?<>]).{6,20}$/))
+{
+        $('#n5').show().text('Password is atleast one special char and number and caps');
+        $('#pwd').val('');
+      }
+      else
+      {
+        $('#n5').hide();
+        c++;
+      }
+      if (cpasswords.length===0){
+        $('#n6').show().text("Please enter the password");
+      }
+      else if(!cpasswords.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}$/))
+{
+        $('#n6').show().text('Password is atleast one special char and number and caps');
+        $('#cpwd').val('');
+      }
+      else if(passwords!=cpasswords)
+      {
+        $('#n6').show().text("confirm passwords is mismatch")
+        $('#cpwd').val('');
+      }
+      else
+      {
+        $('#n6').hide();
+        c++;
+      }
+
+        if(c==5){
+      $("form#myform").submit();
+    }
+
+
+        return false;
+      
+
+
+      });
+$('#subm_btn').click(function(){
+            setTimeout(function() {
+            $('#s').fadeOut('fast')
+          },1);
+          }
+            );
+
+  });
+</script>
+
+
+
+<body>
+    <div class="container" style="margin-top:50px;">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form action="{{url_for('login')}}" id="myform" name="form" method="POST">
+                    {% if error %}
+                        <p class=error><strong>Error:</strong> {{ error }}
+                    {% endif %}
+                    <div class="input-group" id=first>
+                        <span class="input-group-addon" id="basic-addon3">First Name</span>
+                        <input type="text" class="form-control" name="username" id="first" aria-describedby="basic-addon3">
+                    </div>
+                    <p id=n1>
+                    </p>
+                    <br>
+
+
+                    <div class="input-group" id=last>
+                        <span class="input-group-addon" id="basic-addon3">Last Name</span>
+                        <input type="text" class="form-control" id="last" name="last" aria-describedby="basic-addon3">
+                    </div>
+                    <p id=n2>
+                    </p>
+                    <br>
+
+                    <div class="input-group" id=email>
+                        <span class="input-group-addon" id="basic-addon3">Email</span>
+                        <input type="text" class="form-control" id="email" name="email" aria-describedby="basic-addon3">
+                    </div>
+                    <p id=n3>
+                    </p>
+                    <br>
+
+                    <div class="input-group" id=mob>
+                        <span class="input-group-addon" id="basic-addon3">Mobile No:</span>
+                        <input type="text" class="form-control" id="mob" name="mobile" aria-describedby="basic-addon3">
+                    </div>
+                    <p id=n4>
+                    </p>
+                    <br>
+
+                    <div class="input-group" id=pwd>
+                        <span class="input-group-addon" id="basic-addon3">Password</span>
+                        <input type="text" class="form-control" id="pwd" name="password" aria-describedby="basic-addon3">
+                    </div>
+
+                    <p id=n5>
+                    </p>
+                    <br>
+
+                    <div class="input-group" id=cpwd>
+                        <span class="input-group-addon" id="basic-addon3">Confirm Password</span>
+                        <input type="text" class="form-control" id="cpwd" name="cpassword" aria-describedby="basic-addon3">
+                    </div>
+                    <p id=n6>
+                    </p>
+                    <br>
+                    <div>
+                        <input type="button" value="Submit" id="subm_btn" class="btn btn-default btn-sm">
+                        <a href = "{{ url_for('login') }}" class="btn btn-default btn-sm">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
